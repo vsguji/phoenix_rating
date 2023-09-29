@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phoenix_base/phoenix.dart';
 
+import 'extension/rating_assets.dart';
+
 /// 星星视图的自定义构造器
 /// state，[RatingState] 星星状态
 typedef BrnRatingStarBuilder = Widget Function(RatingState state);
@@ -130,12 +132,13 @@ class _BrnRatingStarState extends State<BrnRatingStar> {
   Widget _buildRating(RatingState state) {
     switch (state) {
       case RatingState.select:
-        return PhoenixTools.getAssetSizeImage(BaseAsset.iconStar, 16, 16);
+        return PhoenixTools.getAssetSizeImage(RatingAssets.iconStar, 16, 16);
       case RatingState.half:
-        return PhoenixTools.getAssetSizeImage(BaseAsset.iconStarHalf, 16, 16);
+        return PhoenixTools.getAssetSizeImage(
+            RatingAssets.iconStarHalf, 16, 16);
       case RatingState.unselect:
       default:
-        return PhoenixTools.getAssetSizeImage(BaseAsset.iconStar, 16, 16,
+        return PhoenixTools.getAssetSizeImage(RatingAssets.iconStar, 16, 16,
             color: const Color(0xFFF0F0F0));
     }
   }
