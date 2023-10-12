@@ -5,7 +5,7 @@ import 'extension/rating_assets.dart';
 
 /// 星星视图的自定义构造器
 /// state，[RatingState] 星星状态
-typedef BrnRatingStarBuilder = Widget Function(RatingState state);
+typedef RatingStarBuilder = Widget Function(RatingState state);
 
 /// 星星状态
 enum RatingState {
@@ -25,7 +25,7 @@ enum RatingState {
 /// * 支持点击选中
 /// * 支持是否限制评分最少一颗星，即第一颗星支持是否可反选
 /// * 支持半颗星（仅支持展示，不支持选择）
-class BrnRatingStar extends StatefulWidget {
+class RatingStar extends StatefulWidget {
   static const DEFAULT_COUNT = 5;
   static const DEFAULT_SPACE = 1.0;
 
@@ -42,12 +42,12 @@ class BrnRatingStar extends StatefulWidget {
   final bool canRatingZero;
 
   /// 单颗星星视图的自定义构造器
-  final BrnRatingStarBuilder? starBuilder;
+  final RatingStarBuilder? starBuilder;
 
   /// 如果设置了，就支持编辑
   final ValueChanged<int>? onSelected;
 
-  const BrnRatingStar({
+  const RatingStar({
     Key? key,
     this.count = DEFAULT_COUNT,
     this.selectedCount = 0,
@@ -61,7 +61,7 @@ class BrnRatingStar extends StatefulWidget {
   _BrnRatingStarState createState() => _BrnRatingStarState();
 }
 
-class _BrnRatingStarState extends State<BrnRatingStar> {
+class _BrnRatingStarState extends State<RatingStar> {
   late double currSelected;
 
   @override
@@ -71,7 +71,7 @@ class _BrnRatingStarState extends State<BrnRatingStar> {
   }
 
   @override
-  void didUpdateWidget(BrnRatingStar oldWidget) {
+  void didUpdateWidget(RatingStar oldWidget) {
     currSelected = widget.selectedCount;
     super.didUpdateWidget(oldWidget);
   }
@@ -132,14 +132,15 @@ class _BrnRatingStarState extends State<BrnRatingStar> {
   Widget _buildRating(RatingState state) {
     switch (state) {
       case RatingState.select:
-        return PhoenixTools.getAssetSizeImage(RatingAssets.iconStar, 16, 16);
+        return PhoenixTools.getAssetSizeImage(RatingAssets.iconStar, 16, 16,
+            package: 'phoenix_rating');
       case RatingState.half:
-        return PhoenixTools.getAssetSizeImage(
-            RatingAssets.iconStarHalf, 16, 16);
+        return PhoenixTools.getAssetSizeImage(RatingAssets.iconStarHalf, 16, 16,
+            package: 'phoenix_rating');
       case RatingState.unselect:
       default:
         return PhoenixTools.getAssetSizeImage(RatingAssets.iconStar, 16, 16,
-            color: const Color(0xFFF0F0F0));
+            color: const Color(0xFFF0F0F0), package: 'phoenix_rating');
     }
   }
 }
